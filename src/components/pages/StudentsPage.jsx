@@ -1,9 +1,10 @@
 import { Eye } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import SectionTitle from "../components/SectionTitle";
-import StatusBadge from "../components/StatusBadge";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
+import SectionTitle from "../ui/SectionTitle";
+import StatusBadge from "../ui/StatusBadge";
+import { Link } from "react-router-dom";
 
 function StudentsPage(props) {
   return (
@@ -14,7 +15,7 @@ function StudentsPage(props) {
       />
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <Button className="rounded-2xl">Tous</Button>
+        <Button variant="outline"  className="rounded-2xl">Tous</Button>
         <Button variant="outline" className="rounded-2xl">En attente</Button>
         <Button variant="outline" className="rounded-2xl">Validés</Button>
       </div>
@@ -52,7 +53,13 @@ function StudentsPage(props) {
                       <td className="px-6 py-4">
                         <Button variant="outline" className="rounded-2xl">
                           <Eye className="mr-2 h-4 w-4" />
-                          Ouvrir
+
+                        <Button variant="outline" className="rounded-2xl" asChild>
+                          <Link to={`${student.id}`}>
+                            <Eye className="mr-2 h-4 w-4" />
+                            Ouvrir
+                          </Link>
+                        </Button>
                         </Button>
                       </td>
                     </tr>

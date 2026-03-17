@@ -1,19 +1,13 @@
-const navItems = [
-  { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-  { id: "students", label: "Étudiants", icon: Users },
-  { id: "merchants", label: "Commerçants", icon: Store },
-  { id: "reviews", label: "Avis", icon: ShieldCheck },
-  { id: "settings", label: "Paramètres", icon: Settings },
-];
+import { Users, Store, Ticket, ShieldCheck } from "lucide-react";
 
-const kpis = [
+export const kpis = [
   { label: "Étudiants inscrits", value: "2 486", delta: "+12%", icon: Users },
   { label: "Commerçants partenaires", value: "138", delta: "+6%", icon: Store },
   { label: "Promos utilisées", value: "18 920", delta: "+24%", icon: Ticket },
   { label: "Avis à modérer", value: "17", delta: "-8%", icon: ShieldCheck },
 ];
 
-const students = [
+export const students = [
   {
     id: 1,
     name: "Lina Dupont",
@@ -32,18 +26,9 @@ const students = [
     status: "validated",
     cardExpiry: "2026-08-31",
   },
-  {
-    id: 3,
-    name: "Sofia Almeida",
-    email: "sofia.almeida@etu.unige.ch",
-    school: "UNIGE",
-    submittedAt: "2026-03-10",
-    status: "pending",
-    cardExpiry: "2026-07-15",
-  },
 ];
 
-const merchants = [
+export const merchants = [
   {
     id: 1,
     name: "Café Rhône",
@@ -59,5 +44,24 @@ const merchants = [
     category: "Sport",
     status: "inactive",
     city: "Carouge",
-  }
+    offers: 2,
+    rating: 4.3,
+  },
+];
+
+export const reviews = [
+  {
+    id: 1,
+    author: "Sami",
+    merchant: "Café Rhône",
+    rating: 5,
+    text: "Top, promo bien appliquée et équipe sympa.",
+    photo: "https://via.placeholder.com/400x250?text=Avis+1",
+  },
+];
+
+export const categories = ["Food", "Mode", "Tech", "Sport", "Culture"];
+
+export const admins = [
+  { id: 1, name: "Admin Principal", email: "admin@localconnect.ch", role: "Super Admin" },
 ];

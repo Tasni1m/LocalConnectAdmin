@@ -1,9 +1,9 @@
 import { FolderPlus, UserCog } from "lucide-react";
-
+import { Input } from "../ui/input";
 import { Card, CardContent,CardHeader, CardTitle  } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import SectionTitle from "../SectionTitle";
+import SectionTitle from "../ui/SectionTitle";
 function SettingsPage(props) {
   return (
     <section id="settings">

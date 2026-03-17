@@ -1,11 +1,19 @@
 import { Search, Plus, Star } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import SectionTitle from "../ui/SectionTitle";
-import StatusBadge from "./components/StatusBadge";
+import StatusBadge from "../ui/StatusBadge";
 
-function MerchantsPage(props) {
+function MerchantsPage({ merchants }) {
+  const [formData, setFormData] = useState({ name: "", category: "", city: "" });
+
+  const handleAddMerchant = (e) => {
+    e.preventDefault();
+    if(!formData.name) return;
+    alert(`Le commerce "${formData.name}" a été ajouté avec succès !`);
+    setFormData({ name: "", category: "", city: "" });
+  };
   return (
     <section id="merchants">
       <SectionTitle

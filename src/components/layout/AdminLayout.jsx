@@ -1,53 +1,60 @@
-import React from 'react';
-import { LayoutDashboard, Store, MessageSquare, LogOut, ShieldCheck } from 'lucide-react';
+import React from "react";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { BarChart3, Users, Store, ShieldCheck, Settings, LogOut, BadgeCheck } from "lucide-react";
 
-const AdminLayout = ({ children, activeTab, setActiveTab }) => {
-  const menuItems = [
-    { id: 'dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
-    { id: 'students', label: 'Validation Étudiants', icon: ShieldCheck },
-    { id: 'merchants', label: 'Commerçants', icon: Store },
-    { id: 'reviews', label: 'Modération Avis', icon: MessageSquare },
-  ];
+const navItems = [
+  { id: "dashboard", label: "Dashboard", icon: BarChart3, path: "/admin/dashboard" },
+  { id: "students", label: "Étudiants", icon: Users, path: "/admin/students" },
+  { id: "merchants", label: "Commerçants", icon: Store, path: "/admin/merchants" },
+  { id: "reviews", label: "Avis", icon: ShieldCheck, path: "/admin/reviews" },
+  { id: "settings", label: "Paramètres", icon: Settings, path: "/admin/settings" },
+];
+
+function AdminLayout() {
+  const navigate = useNavigate();
 
   return (
-    <div className="flex h-screen bg-gray-100 font-sans">
-      {/* SIDEBAR */}
-      <div className="w-64 bg-white shadow-md">
-        <div className="p-6 border-b flex items-center gap-2">
-           <div className="w-8 h-8 bg-orange-500 rounded-lg"></div>
-           <span className="text-xl font-bold text-gray-800">LocalConnect</span>
+    <div className="flex h-screen bg-slate-100 text-slate-900 font-sans">
+      {/* SIDEBAR FIXE */}
+      <aside className="w-72 border-r border-slate-200 bg-white p-5 hidden lg:flex flex-col">
+        <div className="flex items-center gap-3 rounded-3xl bg-slate-900 p-4 text-white shadow-sm mb-8">
+          <BadgeCheck className="h-6 w-6" />
+          <h1 className="text-lg font-bold">LocalConnect</h1>
         </div>
-        <nav className="mt-6">
-          {menuItems.map((item) => (
-            <button
+
+        <nav className="flex-1 space-y-2">
+          {navItems.map((item) => (
+            <NavLink
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-4 px-6 py-4 transition-colors ${
-                activeTab === item.id ? 'bg-orange-50 text-orange-600 border-r-4 border-orange-500' : 'text-gray-500 hover:bg-gray-50'
-              }`}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
+                  isActive ? "bg-slate-900 text-white shadow-md" : "text-slate-600 hover:bg-slate-100"
+                }`
+              }
             >
-              <item.icon size={20} />
-              <span className="font-medium">{item.label}</span>
-            </button>
+              <item.icon className="h-5 w-5" />
+              {item.label}
+            </NavLink>
           ))}
         </nav>
-      </div>
 
-      {/* CONTENU PRINCIPAL */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-16 bg-white border-b flex items-center justify-between px-8">
-          <h2 className="text-xl font-semibold text-gray-700 capitalize">{activeTab}</h2>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">Admin: Sophie</span>
-            <button className="p-2 text-gray-400 hover:text-red-500"><LogOut size={20} /></button>
-          </div>
-        </header>
-        <main className="flex-1 overflow-y-auto p-8">
-          {children}
-        </main>
-      </div>
+        <button 
+          onClick={() => navigate("/login")}
+          className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-rose-600 hover:bg-rose-50 mt-auto"
+        >
+          <LogOut className="h-5 w-5" />
+          Déconnexion
+        </button>
+      </aside>
+
+      {/* CONTENU MOBILE ET MAIN */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="p-4 md:p-8">
+          <Outlet /> {/* C'est ici que tes pages Dashboard, Students, etc. s'afficheront */}
+        </div>
+      </main>
     </div>
   );
-};
-
+}
 export default AdminLayout;

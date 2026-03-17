@@ -1,14 +1,14 @@
-
-import './App.css'
-import Sidebar from "./components/layout/Sidebar";
-import Navbar from "./components/layout/Navbar";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/pages/Login";
+import ForgotPassword from "./components/pages/ForgotPassword";
+import AdminLayout from "./components/layout/AdminLayout";
 import DashboardPage from "./components/pages/DashboardPage";
 import StudentsPage from "./components/pages/StudentsPage";
 import MerchantsPage from "./components/pages/MerchantsPage";
 import ReviewsPage from "./components/pages/ReviewsPage";
 import SettingsPage from "./components/pages/SettingsPage";
+import StudentDetailPage from "./components/pages/StudentDetailPage";
 import {
-  navItems,
   kpis,
   students,
   merchants,
@@ -19,22 +19,26 @@ import {
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
-      <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[280px_1fr]">
-        <Sidebar items={navItems} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        <main className="space-y-8 p-4 md:p-6 lg:p-8">
-          <Navbar />
-          <DashboardPage kpis={kpis} />
-          <StudentsPage students={students} />
-          <MerchantsPage merchants={merchants} />
-          <ReviewsPage reviews={reviews} />
-          <SettingsPage categories={categories} admins={admins} />
-        </main>
-      </div>
-    </div>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<DashboardPage kpis={kpis} />} />
+        <Route path="students" element={<StudentsPage students={students} />} />
+              <Route path="students/:id" element={<StudentDetailPage students={students} />} />
+
+        <Route path="merchants" element={<MerchantsPage merchants={merchants} />} />
+        <Route path="reviews" element={<ReviewsPage reviews={reviews} />} />
+        <Route
+          path="settings"
+          element={<SettingsPage categories={categories} admins={admins} />}
+        />
+      </Route>
+    </Routes>
   );
 }
 
-
-export default App
+export default App;
