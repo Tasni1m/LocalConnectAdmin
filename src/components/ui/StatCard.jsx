@@ -1,19 +1,27 @@
-const StatCard = ({ label, value, color, trend }) => (
-  <div className="bg-white p-6 rounded-xl shadow-sm border">
-    <p className="text-gray-500 text-sm font-medium">{label}</p>
-    <div className="flex items-end justify-between mt-2">
-      <h3 className="text-3xl font-bold text-gray-800">{value}</h3>
-      <span className={`text-xs font-bold px-2 py-1 rounded ${trend > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-        {trend > 0 ? '+' : ''}{trend}%
-      </span>
-    </div>
-  </div>
-);
+function StatCard({ item }) {
+  const Icon = item.icon;
+  const isPositive = item.delta.startsWith("+");
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-  <StatCard label="Étudiants Actifs" value="1,240" color="orange" trend={12} />
-  <StatCard label="Commerçants" value="84" color="green" trend={5} />
-  <StatCard label="Coupons Scannés" value="5,892" color="blue" trend={24} />
-</div>
+  return (
+    <div className="rounded-3xl bg-white p-6 shadow-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-sm font-medium text-slate-500">{item.label}</p>
+        <div className="rounded-2xl bg-slate-100 p-2">
+          <Icon className="h-5 w-5 text-slate-600" />
+        </div>
+      </div>
+      <div className="flex items-end justify-between">
+        <h3 className="text-3xl font-bold text-slate-900">{item.value}</h3>
+        <span
+          className={`rounded-full px-2 py-1 text-xs font-bold ${
+            isPositive ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
+          }`}
+        >
+          {item.delta}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default StatCard;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
@@ -6,17 +5,17 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/admin");
+    navigate("/admin/dashboard");
   }
 
   return (
     <div className="min-h-screen bg-slate-100">
       <div className="grid min-h-screen lg:grid-cols-2">
-        <div className="hidden lg:flex flex-col justify-between bg-slate-900 p-12 text-white">
+        <div className="hidden flex-col justify-between bg-slate-900 p-12 text-white lg:flex">
           <div>
             <h1 className="text-4xl font-bold">LocalConnect</h1>
             <p className="mt-4 max-w-md text-slate-300">
-              Espace d’administration pour gérer les étudiants, les commerçants,
+              Espace d'administration pour gérer les étudiants, les commerçants,
               les avis et les paramètres de la plateforme.
             </p>
           </div>
@@ -65,7 +64,6 @@ function Login() {
                   >
                     Mot de passe
                   </label>
-
                   <Link
                     to="/forgot-password"
                     className="text-sm font-medium text-orange-600 hover:text-orange-700"
@@ -85,7 +83,7 @@ function Login() {
 
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-medium text-white transition hover:bg-slate-800"
+                className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-medium text-black-700 transition hover:bg-slate-800"
               >
                 Se connecter
               </button>

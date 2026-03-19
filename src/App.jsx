@@ -4,18 +4,10 @@ import ForgotPassword from "./components/pages/ForgotPassword";
 import AdminLayout from "./components/layout/AdminLayout";
 import DashboardPage from "./components/pages/DashboardPage";
 import StudentsPage from "./components/pages/StudentsPage";
+import StudentDetailPage from "./components/pages/StudentDetailPage";
 import MerchantsPage from "./components/pages/MerchantsPage";
 import ReviewsPage from "./components/pages/ReviewsPage";
 import SettingsPage from "./components/pages/SettingsPage";
-import StudentDetailPage from "./components/pages/StudentDetailPage";
-import {
-  kpis,
-  students,
-  merchants,
-  reviews,
-  categories,
-  admins,
-} from "./components/data/mockData";
 
 function App() {
   return (
@@ -26,16 +18,12 @@ function App() {
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage kpis={kpis} />} />
-        <Route path="students" element={<StudentsPage students={students} />} />
-              <Route path="students/:id" element={<StudentDetailPage students={students} />} />
-
-        <Route path="merchants" element={<MerchantsPage merchants={merchants} />} />
-        <Route path="reviews" element={<ReviewsPage reviews={reviews} />} />
-        <Route
-          path="settings"
-          element={<SettingsPage categories={categories} admins={admins} />}
-        />
+        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="students" element={<StudentsPage />} />
+        <Route path="students/:id" element={<StudentDetailPage />} />
+        <Route path="merchants" element={<MerchantsPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>
   );
