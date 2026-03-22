@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function ForgotPassword() {
+function ForgotPasswordPage() {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/login");
+    navigate("/reset-password");
   }
 
   return (
@@ -60,7 +60,7 @@ function ForgotPassword() {
 
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-black-700 opacity-100 transition hover:bg-slate-800"
+                className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
               >
                 Envoyer le lien de réinitialisation
               </button>
@@ -81,4 +81,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ForgotPasswordPage;

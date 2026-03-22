@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import SectionTitle from "../ui/SectionTitle";
-import StatusBadge from "../ui/StatusBadge";
+import SectionTitle from "../SectionTitle";
+import StatusBadge from "../StatusBadge";
 import { students } from "../data/mockData";
 
+const FILTERS = [
+  { label: "Tous",       value: "all"       },
+  { label: "En attente", value: "pending"   },
+  { label: "Validés",    value: "validated" },
+];
+
 function StudentsPage() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filtered = students.filter(function (s) {
+    if (activeFilter === "all") return true;
+    return s.status === activeFilter;
+  });
+
   return (
     <section id="students" className="space-y-6">
       <SectionTitle
@@ -14,16 +28,24 @@ function StudentsPage() {
         subtitle="Vérifie les cartes étudiantes et consulte les validations en attente."
       />
 
-      <div className="mb-4 flex flex-wrap gap-3">
-        <Button variant="outline" className="rounded-2xl">
-          Tous
-        </Button>
-        <Button variant="outline" className="rounded-2xl">
-          En attente
-        </Button>
-        <Button variant="outline" className="rounded-2xl">
-          Validés
-        </Button>
+      <div className="flex gap-3">
+        {FILTERS.map(function (f) {
+          return (
+            <Button
+              key={f.value}
+              variant={activeFilter === f.value ? "secondary" : "outline"}
+              className="rounded-2xl"
+              onClick={function () { setActiveFilter(f.value); }}
+            >
+              {f.label}
+              {f.value !== "all" && (
+                <span className="ml-2 rounded-full bg-white/20 px-1.5 text-xs">
+                  {students.filter(function (s) { return s.status === f.value; }).length}
+                </span>
+              )}
+            </Button>
+          );
+        })}
       </div>
 
       <Card className="rounded-3xl border-0 shadow-sm">
@@ -37,22 +59,23 @@ function StudentsPage() {
                   <th className="px-6 py-4 font-medium">Date d'envoi</th>
                   <th className="px-6 py-4 font-medium">Expiration carte</th>
                   <th className="px-6 py-4 font-medium">Statut</th>
-                  <th className="px-6 py-4 font-medium">Temps session</th>
+                  <th className="px-6 py-4 font-medium">Dernière session</th>
                   <th className="px-6 py-4 font-medium">Action</th>
                 </tr>
               </thead>
-
               <tbody>
-                {students.map(function (student) {
+                {filtered.length === 0 && (
+                  <tr>
+                    <td colSpan={7} className="px-6 py-10 text-center text-sm text-slate-400">
+                      Aucun étudiant pour ce filtre.
+                    </td>
+                  </tr>
+                )}
+                {filtered.map(function (student) {
                   return (
-                    <tr
-                      key={student.id}
-                      className="border-b border-slate-100 text-sm hover:bg-slate-50"
-                    >
+                    <tr key={student.id} className="border-b border-slate-100 text-sm hover:bg-slate-50">
                       <td className="px-6 py-4">
-                        <p className="font-semibold text-slate-900">
-                          {student.name}
-                        </p>
+                        <p className="font-semibold text-slate-900">{student.name}</p>
                         <p className="text-slate-500">{student.email}</p>
                       </td>
                       <td className="px-6 py-4">{student.school}</td>
@@ -61,7 +84,7 @@ function StudentsPage() {
                       <td className="px-6 py-4">
                         <StatusBadge status={student.status} />
                       </td>
-                      <td className="px-6 py-4">{student.sessionTime}</td>
+                      <td className="px-6 py-4">{student.lastSessionDate}</td>
                       <td className="px-6 py-4">
                         <Button variant="outline" className="rounded-2xl" asChild>
                           <Link to={`${student.id}`}>

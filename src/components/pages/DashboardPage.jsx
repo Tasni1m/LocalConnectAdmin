@@ -1,7 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import SectionTitle from "../ui/SectionTitle";
-import StatCard from "../ui/StatCard";
+import SectionTitle from "../SectionTitle";
+import StatCard from "../StatCard";
 import { kpis, students } from "../data/mockData";
+import graphique from "../../assets/graphique.png";
+
 
 function DashboardPage() {
   const pendingStudents = students.filter(function (student) {
@@ -46,7 +48,7 @@ function DashboardPage() {
           <CardContent>
             <div className="overflow-hidden rounded-2xl border border-slate-200">
               <img
-                src="../../assets/graphique.png"
+                src={graphique}
                 alt="Graphique des inscriptions"
                 className="h-80 w-full object-cover"
               />

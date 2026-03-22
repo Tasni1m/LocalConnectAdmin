@@ -83,7 +83,7 @@ function Login() {
 
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-medium text-black-700 transition hover:bg-slate-800"
+  className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
               >
                 Se connecter
               </button>

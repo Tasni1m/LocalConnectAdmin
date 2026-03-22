@@ -3,7 +3,7 @@ import { Input } from "../ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import SectionTitle from "../ui/SectionTitle";
+import SectionTitle from "../SectionTitle";
 import { categories, admins } from "../data/mockData";
 
 function SettingsPage() {
@@ -30,7 +30,7 @@ function SettingsPage() {
           <CardContent className="space-y-4">
             <div className="flex gap-3">
               <Input className="rounded-2xl" placeholder="Nouvelle catégorie" />
-              <Button className="shrink-0 rounded-2xl" onClick={handleAddCategory}>
+              <Button variant="secondary" className="shrink-0 rounded-2xl" onClick={handleAddCategory}>
                 <FolderPlus className="mr-2 h-4 w-4" />
                 Ajouter
               </Button>
@@ -76,7 +76,7 @@ function SettingsPage() {
 
             <Input className="rounded-2xl" placeholder="Rôle (ex: Modérateur)" />
 
-            <Button className="w-full rounded-2xl text-black-700" onClick={handleAddAdmin}>
+            <Button  variant="secondary" className="w-full rounded-2xl" onClick={handleAddAdmin}>
               <UserCog className="mr-2 h-4 w-4" />
               Ajouter l'administrateur
             </Button>
